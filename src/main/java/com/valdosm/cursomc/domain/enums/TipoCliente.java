@@ -1,6 +1,7 @@
 package com.valdosm.cursomc.domain.enums;
 
 public enum TipoCliente {
+    
     PESSOAFISICA(1,"Pessoa Fisica"),
     PESSOAJURIDICA(2, "Pessoa Juridica");
     private int cod;
