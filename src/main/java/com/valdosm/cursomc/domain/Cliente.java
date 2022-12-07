@@ -12,7 +12,7 @@ public class Cliente {
     private String nome;
     private String email;
     private String cpfOuCnpj;
-    private TipoCliente tipo;
+    private Integer tipo;
 
     private List<Endereco> enderecos = new ArrayList<>();
     
@@ -27,7 +27,7 @@ public class Cliente {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo;
+        this.tipo = tipo.getCod();
     }
 
     public Integer getId() {
@@ -63,11 +63,11 @@ public class Cliente {
     }
 
     public TipoCliente getTipo() {
-        return tipo;
+        return TipoCliente.toEnum(tipo);
     }
 
     public void setTipo(TipoCliente tipo) {
-        this.tipo = tipo;
+        this.tipo = tipo.getCod();
     }
 
     public List<Endereco> getEnderecos() {
