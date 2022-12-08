@@ -60,32 +60,43 @@ public class CursomcApplication implements CommandLineRunner {
 
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
+		Estado est3 = new Estado(null, "Pará");
 
 	    Cidade cid1 = new Cidade(null, "Uberlandia", est1 );
 		Cidade cid2 = new Cidade(null, "São Pulo", est2);
 		Cidade cid3 = new Cidade(null, "Campinas", est2);
+		Cidade cid4 = new Cidade(null, "Belém", est3);
 
 		est1.getCidades().addAll(Arrays.asList(cid1));
 		est2.getCidades().addAll(Arrays.asList(cid2, cid3));
+		est3.getCidades().addAll(Arrays.asList(cid4));
 
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
-		estadoRepository.saveAll(Arrays.asList(est1, est2));
-		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
+		estadoRepository.saveAll(Arrays.asList(est1, est2, est3));
+		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3, cid4));
 
 		Cliente cli1 = new Cliente(null, "Maria Silva", "maria.silva@gmail.com","767.305.492-20", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("32142800", "988263653"));
 
+		Cliente cli2 = new Cliente(null, "Edivaldo Moreira", "valdosm.moreira@gmail.com","123.325.356-20", TipoCliente.PESSOAJURIDICA);
+		cli2.getTelefones().addAll(Arrays.asList("99976288", "32142858"));
+
+
+
 		Endereco e1 = new Endereco(null, "Rua flores", "1258", "santana do Aura", "Aguas brancas", "46640540", cli1, cid1);
 		Endereco e2 = new Endereco(null, "satos", "125", "flores", "Terra Firme", "798565", cli1, cid2);
 
+		Endereco e3 = new Endereco(null, "Nossa união", "08", "liberal", "Terra firme","2524587", cli2, cid4);
+
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 
 
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
 			
 		
