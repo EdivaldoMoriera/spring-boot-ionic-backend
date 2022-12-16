@@ -9,6 +9,15 @@ public class Pagamento implements Serializable {
     
     private Integer id;
     private Integer estado;
+
+    private Pedido pedido;
+    
+    public Pedido getPedido() {
+        return pedido;
+    }
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
     public Pagamento(){
 
     }
