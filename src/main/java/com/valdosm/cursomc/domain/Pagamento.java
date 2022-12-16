@@ -2,14 +2,28 @@ package com.valdosm.cursomc.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+
 import com.valdosm.cursomc.domain.enums.EstadoPagamento;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)//mapeamento de herança
 public class Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    @Id
     private Integer id;
     private Integer estado;
 
+    @OneToOne
+    @JoinColumn(name = "pedido_id")
+    @MapsId //para garantir que i id seja o mesmo da classe pedido
     private Pedido pedido;
     
     public Pedido getPedido() {
