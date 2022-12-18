@@ -21,7 +21,7 @@ public class Pedido implements Serializable {
     private Integer id;
     private Date instante;
 
-        @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")// PARA EVITAR O ERRO DE ENTIDADE TRANSIENT
+ @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")/*PARA EVITAR O ERRO DE ENTIDADE TRANSIENT*/
     private Pagamento pagamento;
 
     @ManyToOne
@@ -36,10 +36,9 @@ public class Pedido implements Serializable {
 
     }
 
-    public Pedido(Integer id, Date instante, Pagamento pagamento, Cliente cliente, Endereco enderecoDeEntrega) {
+    public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
         this.id = id;
         this.instante = instante;
-        this.pagamento = pagamento;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
     }

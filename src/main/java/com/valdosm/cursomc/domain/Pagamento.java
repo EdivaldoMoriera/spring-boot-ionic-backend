@@ -13,44 +13,55 @@ import javax.persistence.OneToOne;
 import com.valdosm.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)//mapeamento de herança
-public class Pagamento implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Pagamento implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     private Integer id;
-    private Integer estado;
+    private EstadoPagamento estado;
 
+    public EstadoPagamento getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPagamento estado) {
+        this.estado = estado;
+    }
+
+   
     @OneToOne
     @JoinColumn(name = "pedido_id")
-    @MapsId //para garantir que i id seja o mesmo da classe pedido
+    @MapsId
     private Pedido pedido;
+
+
+    public Pagamento() {
+
+    }
+
+    public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
+        this.id = id;
+        this.estado = estado;
+        this.pedido = pedido;
+    }
+
     
     public Pedido getPedido() {
         return pedido;
     }
+
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-    public Pagamento(){
 
-    }
-    public Pagamento(Integer id, EstadoPagamento estado) {
-        this.id = id;
-        this.estado = estado.getCod();
-    }
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
-    }
-    public EstadoPagamento getTipo() {
-        return EstadoPagamento.toEnum(estado);
-    }
-
-    public void setTipo(EstadoPagamento estado) {
-        this.estado = estado.getCod();
+    
     }
 
     @Override
@@ -60,6 +71,7 @@ public class Pagamento implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -76,6 +88,5 @@ public class Pagamento implements Serializable {
             return false;
         return true;
     }
-    
-    
+
 }
