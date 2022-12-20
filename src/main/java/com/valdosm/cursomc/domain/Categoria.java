@@ -29,9 +29,9 @@ public class Categoria implements Serializable{
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-    public Categoria(Integer id, String name) {
+    public Categoria(Integer id, String nome) {
         this.id = id;
-        this.nome = name;
+        this.nome = nome;
     }
     public Integer getId() {
         return id;
@@ -39,10 +39,10 @@ public class Categoria implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getName() {
+    public String getNome() {
         return nome;
     }
-    public void setName(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
     @Override
