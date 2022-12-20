@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Embeddable/*atributo  uma outra classe ItemPedido */
 public class ItemPedidoPk implements Serializable {
 

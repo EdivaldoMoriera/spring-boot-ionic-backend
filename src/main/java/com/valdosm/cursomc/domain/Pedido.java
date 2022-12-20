@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -22,6 +24,7 @@ public class Pedido implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JsonFormat(pattern = "dd/MM/yyy HH:mm")
     private Date instante;
 
  @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")/*PARA EVITAR O ERRO DE ENTIDADE TRANSIENT*/
