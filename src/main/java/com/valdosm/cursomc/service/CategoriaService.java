@@ -13,13 +13,19 @@ import com.valdosm.cursomc.service.exception.ObjectNotFoundException;
 @Service
 public class CategoriaService {
     @Autowired
-    private CategoriaRepository repository;
+    private CategoriaRepository categoriaRepository;
     public List<Categoria> fidAll(){
-        return repository.findAll();
+        return categoriaRepository.findAll();
     }
     //por id
     public Categoria findById( Integer id){
-        Optional<Categoria> obj = repository.findById(id);
+        Optional<Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado Id:" + id+ ", Tipo:" +Categoria.class.getName()));       
     } 
+
+    //inserir nova categoria metodo post
+    public Categoria insert(Categoria categoria){
+        return categoriaRepository.save(categoria);
+
+    }
 }
