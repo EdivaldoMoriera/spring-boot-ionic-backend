@@ -28,4 +28,13 @@ public class CategoriaService {
         return categoriaRepository.save(categoria);
 
     }
+    //metodo put
+    public Categoria uppate(Integer  id,  Categoria obj){
+        Categoria entity = categoriaRepository.getReferenceById(id);
+        updateData(obj, entity);
+        return categoriaRepository.save(entity);
+    }
+    private void updateData(Categoria obj, Categoria entity) {
+        entity.setNome(obj.getNome());
+    }
 }
