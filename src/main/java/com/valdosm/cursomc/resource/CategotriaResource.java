@@ -2,6 +2,7 @@ package com.valdosm.cursomc.resource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.valdosm.cursomc.domain.Categoria;
+import com.valdosm.cursomc.domain.dto.CategoriaDTO;
 import com.valdosm.cursomc.service.CategoriaService;
 
 @RestController
@@ -24,10 +26,13 @@ public class CategotriaResource {
     @Autowired
     private CategoriaService categoriaService;
     @GetMapping
-    public ResponseEntity<List<Categoria>> findAll(){
+    public ResponseEntity<List<CategoriaDTO>> findAll(){
         List<Categoria> list = categoriaService.fidAll();
-        return ResponseEntity.ok().body(list);
+        List<CategoriaDTO> listDto = list.stream()
+        .map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
+
     @RequestMapping(value = "/{id}")
     @GetMapping
     public ResponseEntity<Categoria> findById(@PathVariable Integer id){
@@ -50,7 +55,7 @@ public class CategotriaResource {
     }
     //metodo delete
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Categoria> delete(@PathVariable Integer id){
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
         categoriaService.delete(id);
         return ResponseEntity.noContent().build();
     }
