@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,7 @@ import com.valdosm.cursomc.service.CategoriaService;
 
 @RestController
 @RequestMapping(value = "/categorias")
-public class CategotriaResource {
+public class CategoriaResource {
     @Autowired
     private CategoriaService categoriaService;
     @GetMapping
@@ -43,15 +45,17 @@ public class CategotriaResource {
     }
     //inserir nova categoria metodo post
     @PostMapping
-    public ResponseEntity<Categoria>insert( @RequestBody Categoria categoria){
-        categoria = categoriaService.insert(categoria);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(categoria.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+    public ResponseEntity<Categoria>insert(@Valid @RequestBody CategoriaDTO objDto){
+        Categoria obj = categoriaService.fromDto(objDto);
+        obj = categoriaService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).body(obj);
 
     }
     //metodo put
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Categoria> update(@PathVariable Integer id, @RequestBody Categoria obj){
+    public ResponseEntity<Categoria> update( @Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id){
+        Categoria obj = categoriaService.fromDto(objDto);
         obj = categoriaService.uppate(id, obj);
         return ResponseEntity.ok().body(obj);
     }
