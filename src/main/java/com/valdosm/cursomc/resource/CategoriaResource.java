@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.valdosm.cursomc.domain.Categoria;
-import com.valdosm.cursomc.domain.dto.CategoriaDTO;
+import com.valdosm.cursomc.domain.dto.CategoriaDto;
 import com.valdosm.cursomc.service.CategoriaService;
 
 @RestController
@@ -30,10 +30,10 @@ public class CategoriaResource {
     @Autowired
     private CategoriaService categoriaService;
     @GetMapping
-    public ResponseEntity<List<CategoriaDTO>> findAll(){
+    public ResponseEntity<List<CategoriaDto>> findAll(){
         List<Categoria> list = categoriaService.fidAll();
-        List<CategoriaDTO> listDto = list.stream()
-        .map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+        List<CategoriaDto> listDto = list.stream()
+        .map(obj -> new CategoriaDto(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
@@ -45,7 +45,7 @@ public class CategoriaResource {
     }
     //inserir nova categoria metodo post
     @PostMapping
-    public ResponseEntity<Categoria>insert(@Valid @RequestBody CategoriaDTO objDto){
+    public ResponseEntity<Categoria>insert(@Valid @RequestBody CategoriaDto objDto){
         Categoria obj = categoriaService.fromDto(objDto);
         obj = categoriaService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -54,7 +54,7 @@ public class CategoriaResource {
     }
     //metodo put
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Categoria> update( @Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id){
+    public ResponseEntity<Categoria> update( @Valid @RequestBody CategoriaDto objDto, @PathVariable Integer id){
         Categoria obj = categoriaService.fromDto(objDto);
         obj = categoriaService.uppate(id, obj);
         return ResponseEntity.ok().body(obj);
@@ -68,14 +68,14 @@ public class CategoriaResource {
 
     //paginação
     @GetMapping(value = "/pages")
-    public ResponseEntity<Page<CategoriaDTO>>findPage( 
+    public ResponseEntity<Page<CategoriaDto>>findPage( 
         @RequestParam(value = "page", defaultValue = "0") Integer page,
         @RequestParam(value = "linesPerPages", defaultValue = "24") Integer linesPerPages, 
         @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
         @RequestParam(value = "direction", defaultValue = "ASC") String direction){
 
         Page<Categoria> list = categoriaService.findPage(page, linesPerPages, orderBy, direction);
-        Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));
+        Page<CategoriaDto> listDto = list.map(obj -> new CategoriaDto(obj));
         return ResponseEntity.ok().body(listDto);
 
         }
