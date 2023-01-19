@@ -31,7 +31,7 @@ public class ClienteResource {
     public ResponseEntity<List<ClienteDto>> findAll() {
         List<Cliente> list = clienteService.findAll();
         List<ClienteDto> listDto = list.stream()
-                .map(obj -> new ClienteDto(obj)).collect(Collectors.toList());
+                .map(ClienteDto::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
@@ -66,7 +66,7 @@ public class ClienteResource {
             @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 
         Page<Cliente> list = clienteService.findPage(page, linesPerPages, orderBy, direction);
-        Page<ClienteDto> listDto = list.map(obj -> new ClienteDto(obj));
+        Page<ClienteDto> listDto = list.map(ClienteDto::new);
         return ResponseEntity.ok().body(listDto);
 
     }

@@ -33,7 +33,7 @@ public class CategoriaResource {
     public ResponseEntity<List<CategoriaDto>> findAll(){
         List<Categoria> list = categoriaService.fidAll();
         List<CategoriaDto> listDto = list.stream()
-        .map(obj -> new CategoriaDto(obj)).collect(Collectors.toList());
+        .map(CategoriaDto::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
@@ -75,7 +75,7 @@ public class CategoriaResource {
         @RequestParam(value = "direction", defaultValue = "ASC") String direction){
 
         Page<Categoria> list = categoriaService.findPage(page, linesPerPages, orderBy, direction);
-        Page<CategoriaDto> listDto = list.map(obj -> new CategoriaDto(obj));
+        Page<CategoriaDto> listDto = list.map(CategoriaDto::new);
         return ResponseEntity.ok().body(listDto);
 
         }
