@@ -6,7 +6,7 @@ import java.util.List;
 import com.valdosm.cursomc.resource.StandardError;
 
 public class ValidationError extends StandardError {
-    private List<FieldMenssage> erros = new ArrayList<>();
+    private List<FieldMessage> erros = new ArrayList<>();
 
     public ValidationError() {
     }
@@ -14,12 +14,12 @@ public class ValidationError extends StandardError {
     public ValidationError(Integer status, String msg, Long timeStamp) {
         super(status, msg, timeStamp);
     }
-    public List<FieldMenssage> getErros() {
+    public List<FieldMessage> getErros() {
         return erros;
     }
 
     public void addError(String fieldName, String message){
-        erros.add(new FieldMenssage(fieldName, message));
+        erros.add(new FieldMessage(fieldName, message));
 
     }
     }
