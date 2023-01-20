@@ -17,16 +17,17 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
     }
 
     @Override
-    public boolean isValid(ClienteNewDto clienteNewDto, ConstraintValidatorContext context) {
+    public boolean isValid(ClienteNewDto objDto, ConstraintValidatorContext context) {
         List<FieldMessage> list = new ArrayList<>();
 
         // inclua os testes aqui, inserindo erros na lista
-        if(clienteNewDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(clienteNewDto.getCpfOuCnpj())){
-            list.add(new FieldMessage("CpfOucnpj", "  Cpf invalido "));
-        }
-        if(clienteNewDto.getCpfOuCnpj().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(clienteNewDto.getCpfOuCnpj())){
-            list.add(new FieldMessage("CpfOuCnpj", "Cnpj Invalido"));
-        }
+        if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
+			list.add(new FieldMessage("cpfOuCnpj", "CPF inválido"));
+		}
+        if (objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
+			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
+		}
+
 
         for (FieldMessage e : list) {
             context.disableDefaultConstraintViolation();
