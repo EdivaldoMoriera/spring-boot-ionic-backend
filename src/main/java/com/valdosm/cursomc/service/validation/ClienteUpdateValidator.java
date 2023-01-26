@@ -25,7 +25,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 
     @Override
     public void initialize(ClienteUpdate ann) {
-        // TODO document why this method is empty
+
     }
 
     @Override

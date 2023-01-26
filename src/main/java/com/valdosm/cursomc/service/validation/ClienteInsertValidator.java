@@ -20,7 +20,7 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 
     @Override
     public void initialize(ClienteInsert ann) {
-        // TODO document why this method is empty
+    
     }
 
     @Override
