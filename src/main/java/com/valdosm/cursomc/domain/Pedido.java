@@ -60,12 +60,12 @@ public class Pedido implements Serializable {
         return soma;
 
     }
-    public Set<ItemPedido> getItems() {
+    public Set<ItemPedido> getItens() {
         return itens;
     }
 
-    public void setItems(Set<ItemPedido> items) {
-        this.itens = items;
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
 

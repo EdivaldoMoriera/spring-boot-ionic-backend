@@ -24,20 +24,16 @@ public class CategoriaService {
     public List<Categoria> fidAll() {
         return categoriaRepository.findAll();
     }
-
     // por id
     public Categoria findById(Integer id) {
         Optional<Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado Id:" + id + ", Tipo:" + Categoria.class.getName()));
     }
-
     // inserir nova categoria metodo post
     public Categoria insert(Categoria categoria) {
         return categoriaRepository.save(categoria);
-
     }
-
     // metodo put
     public Categoria uppate(Integer id, Categoria obj) {
         Categoria entity = categoriaRepository.getReferenceById(id);
