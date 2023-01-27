@@ -66,7 +66,7 @@ public class Produto implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public String getNOme() {
+    public String getNome() {
         return nome;
     }
     public void setName(String nome) {
